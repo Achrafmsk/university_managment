@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <!--Creating Email Template in Odoo-->
+
+
+    <record id="student_inscription_email" model="mail.template">
+        <field name="name">Student : Send by email</field>
+        <field name="model_id" ref="model_university_student"/>
+        <field name="subject">Student Inscription (${object.f_name})</field>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                <p style="margin: 0px; padding: 0px; font-size: 13px;text-align: justify;letter-spacing: 1px;">
+                    Cher(ère) étudiant(e):
+                    <b>${object.f_name} ${object.l_name}</b>
+                    <br/>
+                    <br/>
+                    Nous vous addressons cet e-mail afin de vous informer que vous êtes désormais inscrits au <b>
+                    ${object.class_id.class_name}</b>.<br/>Inscription effectuée le : ${object.date_inscription}, vous
+                    trouverez ci joint votre attestation
+                    d'inscription.
+                    <br/>
+                    <br/>
+                    Vos paramètres de connexion sont les suivants :
+                    <br/>
+                    <br/>
+                    login :
+                    <b>${object.e_mail}</b>
+                    <br/>
+                    password :
+                    <b>${object.password}</b>
+                    <br/>
+                    <br/>
+                    NB: Faites attention! vous êtes inscrits sur la plateforme d'enseignement en ligne avec le compte
+                    @uvt.tn . Vous avez l'obligation de l'utiliser dans toutes vos échanges sur la plateforme avec vos tuteurs et coordinateur.
+                    on vous souhaite une excellente formation.
+                    <br/>
+                    <br/>
+                    <br/>
+                    Pour toute information supplémentaire n'hésitez pas à contacter le bureau de relation avec les
+                    étudiants dans notre université.
+                    <br/>
+                    <br/>
+                    <br/>
+                    Cordialement.
+                </p>
+            </div>
+        </field>
+        <field name="report_template" ref="report_student_inscription"/>
+        <field name="report_name">Attestation d'inscription_${(object.f_name)}_${(object.l_name)}</field>
+    </record>
+
+</odoo>

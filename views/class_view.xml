@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_class_kanban">
+        <field name="name">class.view.kanban</field>
+        <field name="model">university.class</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="class_name"/>
+                <field name="class_code"/>
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <ul>
+                                <li>Classroom name :
+                                    <field name="class_name"/>
+                                </li>
+                                <li>Classroom code :
+                                    <field name="class_code"/>
+                                </li>
+                            </ul>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_class_tree">
+        <field name="name">class.view.tree</field>
+        <field name="model">university.class</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="reference"/>
+                <field name="class_name"/>
+                <field name="class_code"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_class_form">
+        <field name="name">class.view.form</field>
+        <field name="model">university.class</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="reference"/>
+                        </h1>
+                    </div>
+                    <group string="Class">
+                        <field name="class_name"/>
+                        <field name="class_code"/>
+
+                    </group>
+                    <notebook>
+
+                        <page string="Etudiants" name="etudiants">
+                            <group>
+                                <field name="student_ids"/>
+                            </group>
+                        </page>
+                         <page string="Professeurs" name="professeurs">
+                        <group>
+                          <field name="professor_ids" widget="many2many_tags"/>
+                        </group>
+                        </page> <page string="Matieres" name="matieres">
+                        <group>
+                          <field name="subject_ids" widget="many2many_tags"/>
+                        </group>
+                        </page>
+                    </notebook>
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <record id="class_search" model="ir.ui.view">
+        <field name="name">university.class.search</field>
+        <field name="model">university.class</field>
+        <field name="arch" type="xml">
+            <search string="class">
+                <field name="class_code"/>
+                <separator/>
+            </search>
+        </field>
+    </record>
+
+    <record id="class_action_window" model="ir.actions.act_window">
+        <field name="name">classes</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">university.class</field>
+        <field name="view_mode">kanban,tree,form</field>
+
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                add your first class !
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="class_menu_root"
+              name="Class"
+              parent="university_managment.university_menu_root"
+              sequence="10"/>
+
+    <menuitem id="class_menu"
+              name="Classes"
+              parent="class_menu_root"
+              action="class_action_window"
+              sequence="10"/>
+</odoo>

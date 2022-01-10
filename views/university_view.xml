@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+
+    <record id="university_action_window" model="ir.actions.act_window">
+        <field name="name">university</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">university.root</field>
+        <field name="help" type="html">
+            <p class="fa fa-smile-o">
+                Welcome to our University !
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="university_menu_root"
+              name="University"
+              web_icon="university_managment,static/src/img/icon.png"
+              action="university_action_window"
+              sequence="10"/>
+
+
+</odoo>

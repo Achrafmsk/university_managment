@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="report_student_card">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+                            <div class="card-header">
+                                <b t-field="o.f_name"/>
+                                <b t-field="o.l_name"/>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">identity card :
+                                    <b t-field="o.identity_card"/>
+                                </h5>
+                                <p class="card-text">
+                                    <t t-if="o.avatar">
+                                        <img t-att-src="'data:image/png;base64,%s' % to_text(o.avatar)"
+                                             style="max-height:4cm; max-width:4cm;-webkit-transform: rotate(-90deg);-moz-transform: rotate(-90deg);-o-transform: rotate(-90deg);-ms-transform: rotate(-90deg);transform: rotate(-90deg);"/>
+                                    </t>
+                                    <ul>
+                                        <li class="badge badge-secondary">Date of birth :
+                                            <b class="badge badge-success" t-field="o.date_of_birth"/>
+                                        </li>
+                                        <li class="badge badge-secondary">Gender :
+                                            <b class="badge badge-success" t-field="o.gender"/>
+                                        </li>
+                                        <li class="badge badge-secondary">Date of Inscription :
+                                            <b class="badge badge-success" t-field="o.date_inscription"/>
+                                        </li>
+                                        <li class="badge badge-secondary">E-mail :
+                                            <b class="badge badge-success" t-field="o.e_mail"/>
+                                        </li>
+                                        <li class="badge badge-secondary">Phone number :
+                                            <b class="badge badge-success" t-field="o.phone"/>
+                                        </li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_student_inscription">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <p style="text-align:right">Tunis le :
+                            <b t-field="o.date"/>
+                        </p>
+                        <br/>
+                        <h3 style="text-align:center;">Attestation d'inscription</h3>
+                        <br/>
+                        <br/>
+                        <p>Madame, Monsieur,
+                            <br/>
+                            La présente atteste l'inscription à l'université virtuelle de tunis de l'étudiant :
+                            <br/>
+                            <br/>
+                            <ul>
+                                <b>
+                                    <li>Prénom :
+                                        <span t-field="o.f_name"/>
+                                    </li>
+                                    <li>Nom :
+                                        <span t-field="o.l_name"/>
+                                    </li>
+                                    <li>Date de naissance :
+                                        <span t-field="o.date_of_birth"/>
+                                    </li>
+                                    <li>N°CIN :
+                                        <span t-field="o.identity_card"/>
+                                    </li>
+                                </b>
+                            </ul>
+                            <br/>
+                            <br/>
+                            Inscription effectuée le :
+                            <span t-field="o.date_inscription"/>
+                            <br/>
+                            Classe :
+                            <b t-field="o.class_id"/>
+                        </p>
+                        <br/>
+                        <br/>
+                        <p>Je vous prie de recevoir l'expression de mes sentiments les meilleurs</p>
+
+                        <div style="width:100%;height:40%;margin-top:45%">
+                            <p>
+                                <b>Important</b>
+                                : cette attestation n'est livrée qu'une seule fois
+                            </p>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

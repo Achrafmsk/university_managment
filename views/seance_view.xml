@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_class_kanban">
+        <field name="name">seance.view.kanban</field>
+        <field name="model">university.seance</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="seance_code"/>
+                <field name="matiere"/>
+                <field name="seance_date_debut"/>
+                <field name="seance_date_fin"/>
+                <field name="teacher_id"/>
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <ul>
+                                <li>Department name :
+                                    <field name="seance_code"/>
+                                </li>
+                                <li>Department code :
+                                      <field name="seance_date_debut"/>
+                                </li>
+                                <li>Department code :
+                                    <field name="seance_date_fin"/>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+       <record id="seance_calendar" model="ir.ui.view">
+        <field name="name">university.seance.calendar</field>
+        <field name="model">university.seance</field>
+        <field name="arch" type="xml">
+            <calendar string="seance Calendar" date_start="seance_date_debut" date_stop="seance_date_fin" color="seance_id" mode="month" quick_add="True">
+                <field name="seance_code"/>
+                <field name="seance_id"/>
+                <field name="teacher_id"/>
+            </calendar>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_seance_tree">
+        <field name="name">seance.view.tree</field>
+        <field name="model">university.seance</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="reference"/>
+                <field name="seance_code"/>
+                <field name="seance_date_debut"/>
+                <field name="seance_date_fin"/>
+                <field name="seance_id"/>
+                <field name="teacher_id"/>
+
+
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="seance_form_view">
+      <field name="name">seances From</field>
+      <field name="model">university.seance</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+             <field name="reference"/>
+                <field name="seance_code"/>
+                <field name="seance_date_debut"/>
+                <field name="seance_date_fin"/>
+                <field name="seance_id"/>
+                <field name="teacher_id"/>
+          </group>
+
+        </form>
+      </field>
+    </record>
+
+    <record id="seance_search" model="ir.ui.view">
+        <field name="name">university.seance.search</field>
+        <field name="model">university.seance</field>
+        <field name="arch" type="xml">
+            <search string="seance">
+                <field name="seance_code"/>
+                <field name="teacher_id"/>
+                <separator/>
+            </search>
+        </field>
+    </record>
+
+    <record id="seance_action_window" model="ir.actions.act_window">
+        <field name="name">seance</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">university.seance</field>
+        <field name="view_mode">calendar,kanban,tree,form</field>
+
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                add your first seance !
+            </p>
+        </field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_class_kanban">
+        <field name="name">emploi.view.kanban</field>
+        <field name="model">university.emploi</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="emploi_name"/>
+                <field name="emploi_code"/>
+                <field name="emploi_date_creation"/>
+
+
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <ul>
+                                <li>Department name :
+                                    <field name="emploi_name"/>
+                                </li>
+                                <li>Department code :
+                                    <field name="emploi_code"/>
+                                </li>
+                                <li>Department code :
+                                    <field name="emploi_date_creation"/>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_emploi_tree">
+        <field name="name">emploi.view.tree</field>
+        <field name="model">university.emploi</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="reference"/>
+                <field name="emploi_name"/>
+                <field name="emploi_code"/>
+                <field name="emploi_date_creation"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="emploi_form_view">
+      <field name="name">Emploi From</field>
+      <field name="model">university.emploi</field>
+      <field name="arch" type="xml">
+        <form>
+            <group>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_open_emploi_seance"
+                                string="Emploi"
+                                class="oe_stat_button"
+                                type="object"
+                                icon="fa-calendar">
+                            <field string="Sces" name="seance_count" widget="statinfo"/>
+                        </button>
+                    </div>
+            </group>
+          <group>
+                <field name="reference"/>
+                <field name="emploi_name"/>
+                <field name="emploi_code"/>
+                <field name="class_id"/>
+                <field name="emploi_date_creation"/>
+          </group>
+                    <notebook>
+
+                        <page string="Seances" name="seances">
+                            <group>
+                                <field name="seance_ids"/>
+                            </group>
+                        </page>
+
+                    </notebook>
+        </form>
+      </field>
+    </record>
+
+    <record id="emploi_search" model="ir.ui.view">
+        <field name="name">university.emploi.search</field>
+        <field name="model">university.emploi</field>
+        <field name="arch" type="xml">
+            <search string="emploi">
+                <field name="emploi_name"/>
+                <separator/>
+            </search>
+        </field>
+    </record>
+
+    <record id="emploi_action_window" model="ir.actions.act_window">
+        <field name="name">emploi</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">university.emploi</field>
+        <field name="view_mode">kanban,tree,form</field>
+
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                add your first emploi !
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="emploi_menu_root"
+              name="Emploi"
+              parent="university_managment.university_menu_root"
+              sequence="15"/>
+
+    <menuitem id="emploi_menu"
+              name="Emploi"
+              parent="emploi_menu_root"
+              action="emploi_action_window"
+              sequence="12"/>
+
+     <menuitem id="seance_menu"
+              name="Seances"
+              parent="university_managment.emploi_menu_root"
+              action="university_managment.seance_action_window"
+              sequence="15"/>
+</odoo>

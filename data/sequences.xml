@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<data>
+
+<!--    sequence for university student-->
+    <record id="seq_university_student" model="ir.sequence">
+        <field name="name">student sequence</field>
+        <field name="code">university.student.seq</field>
+        <field name="prefix">US</field>
+        <field name="padding">5</field>
+    </record>
+
+    <!--    sequence for university teacher-->
+    <record id="seq_university_teacher" model="ir.sequence">
+        <field name="name">teacher sequence</field>
+        <field name="code">university.teacher.seq</field>
+        <field name="prefix">TCH</field>
+        <field name="padding">5</field>
+    </record>
+    <!--    sequence for university Emploi-->
+    <record id="seq_university_emploi" model="ir.sequence">
+        <field name="name">Emploi sequence</field>
+        <field name="code">university.emploi.seq</field>
+        <field name="prefix">Emp</field>
+        <field name="padding">5</field>
+    </record>
+    <!--    sequence for university Emploi-->
+    <record id="seq_university_seance" model="ir.sequence">
+        <field name="name">Seance sequence</field>
+        <field name="code">university.seance.seq</field>
+        <field name="prefix">Sc</field>
+        <field name="padding">5</field>
+    </record>
+
+    <!--    sequence for university department-->
+    <record id="seq_university_department" model="ir.sequence">
+        <field name="name">department sequence</field>
+        <field name="code">university.department.seq</field>
+        <field name="prefix">Dept</field>
+        <field name="padding">3</field>
+    </record>
+     <!--    sequence for university department-->
+    <record id="seq_university_class" model="ir.sequence">
+        <field name="name">class sequence</field>
+        <field name="code">university.class.seq</field>
+        <field name="prefix">Cls</field>
+        <field name="padding">3</field>
+    </record>
+    <!--    sequence for university department-->
+    <record id="seq_university_subject" model="ir.sequence">
+        <field name="name">subject sequence</field>
+        <field name="code">university.subject.seq</field>
+        <field name="prefix">Sbj</field>
+        <field name="padding">3</field>
+    </record>
+
+</data>
+</odoo>

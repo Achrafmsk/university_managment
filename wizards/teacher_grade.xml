@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="edit_grade_wizard_form1" model="ir.ui.view">
+        <field name="name">edit.grade.wizard.form</field>
+        <field name="model">teacher.grade</field>
+        <field name="arch" type="xml">
+            <form string="New grade">
+                <group >
+                    <field name="grade"/>
+                </group>
+                <footer>
+                    <button name="%(university_managment.report_teacher_card1)d" string="print report" class="btn-primary" type ="action"  />
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="edit_grade_wizard" model="ir.actions.act_window">
+        <field name="name">edit.grade.wizard</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">teacher.grade</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="edit_grade_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

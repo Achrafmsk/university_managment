@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_department_kanban">
+        <field name="name">department.view.kanban</field>
+        <field name="model">university.department</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="director"/>
+                <field name="discipline"/>
+                <field name="date"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <ul>
+                                <li>Department name :
+                                    <field name="name"/>
+                                </li>
+                                <li>Department code :
+                                    <field name="code"/>
+                                </li>
+                                <li>director :
+                                    <field name="director"/>
+                                </li>
+                                <li>Date of creation :
+                                    <field name="date"/>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_department_tree">
+        <field name="name">department.view.tree</field>
+        <field name="model">university.department</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="director"/>
+                <field name="discipline"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_department_form">
+        <field name="name">department.view.form</field>
+        <field name="model">university.department</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="reference"/>
+                        </h1>
+                    </div>
+                    <group string="Department">
+                        <field name="name"/>
+                        <field name="code"/>
+                        <field name="director"/>
+                        <field name="discipline"/>
+                        <field name="date"/>
+                    </group>
+                     <notebook>
+                         <page string="Professeurs" name="professeurs">
+                            <group>
+                                <field name="professor_ids"/>
+                            </group>
+                        </page> <page string="Matieres" name="matiere">
+                            <group>
+                                <field name="subject_ids"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="department_search" model="ir.ui.view">
+        <field name="name">university.department.search</field>
+        <field name="model">university.department</field>
+        <field name="arch" type="xml">
+            <search string="departments">
+                <field name="code"/>
+                <field name="discipline"/>
+                <separator/>
+            </search>
+        </field>
+    </record>
+
+    <record id="department_action_window" model="ir.actions.act_window">
+        <field name="name">departments</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">university.department</field>
+        <field name="view_mode">kanban,tree,form</field>
+
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                add your first department !
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="department_menu_root"
+              name="Departments"
+              parent="university_managment.university_menu_root"
+              sequence="10"/>
+
+    <menuitem id="department_menu"
+              name="Departments"
+              parent="department_menu_root"
+              action="department_action_window"
+              sequence="10"/>
+</odoo>

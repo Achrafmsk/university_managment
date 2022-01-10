@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="acess_user_group" model="res.groups">
+        <field name="name">access user</field>
+    </record>
+    <!-- comment creer un menu website (gestion user) -->
+    <record model="website.menu" id="menu_web_student_action_window">
+        <field name="name"> Vous êtes Etudiants  </field>
+        <field name="url">/university/student/ </field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence">50</field>
+    </record>
+
+    <record model="website.menu" id="menu_web_professeur_action_window">
+        <field name="name"> Vous êtes Professeur  </field>
+        <field name="url">/university/teacher/ </field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence">50</field>
+    </record>
+    <template id="student_page" name="University Student">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="oe_structure">
+                    <div class="container">
+                        <div class="row">
+                            <div class='col-md-6'>
+                                <h1>Etudiants </h1>
+                            </div>
+                            <div class="col-md-12">
+                                <form class="row g-3 needs-validation" role="form" action="/creer/student" method="POST"
+                                      validate="True">
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="f_name" class="form-label">C.I.N</label>
+                                            <input type="text" name="cin" class="form-control" id="cin"
+                                                   required="required" minlength="3" maxlength="20" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="f_name" class="form-label">Nom Etudiant</label>
+                                            <input type="text" name="f_name" class="form-control" id="f_name"
+                                                   required="required" minlength="3" maxlength="20" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="date_of_birth" class="form-label">Date de naissance</label>
+                                            <input type="Date" name="date_of_birth" class="form-control" id="date_of_birth"
+                                                   required="required" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="e_mail" class="form-label">Email</label>
+                                            <input type="email" name="e_mail" class="form-control" id="e_mail"
+                                                   required="required"
+                                                   pattern="[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([_\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="identity_card" class="form-label">
+                                                N°cin/N°passeport</label>
+                                            <input type="text" name="identity_card" class="form-control"
+                                                   id="identity_card" required="required"
+                                                   pattern="[ \.\-]?[0-9]{2}[ \.\-]?[0-9]{2}[ \.\-]?[0-9]{2}[ \.\-]?[0-9]{2}" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="phone" class="form-label">Téléphone</label>
+                                            <input type="tel" name="phone" class="form-control" id="phone"
+                                                   required="required" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="l_name" class="form-label">Prenom Etudiant</label>
+                                            <input type="text" name="l_name" class="form-control" id="l_name"
+                                                   required="required" minlength="3" maxlength="20" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="rue" class="form-label">Rue</label>
+                                            <input type="text" name="rue" class="form-control" id="rue"
+                                                   required="required" minlength="3" maxlength="20" />
+                                        </div>
+
+                                          <div class="form-group">
+                                            <label for="ville" class="form-label">Ville</label>
+                                            <input type="text" name="ville" class="form-control" id="ville"
+                                                   required="required" minlength="3" maxlength="20" />
+                                        </div>
+
+                                          <div class="form-group">
+                                            <label for="code_postale" class="form-label">Code Postal</label>
+                                            <input type="text" name="code_postale" class="form-control" id="code_postale"
+                                                   required="required" minlength="3" maxlength="20" />
+                                        </div>
+                                         <div class="form-group">
+                                            <label for="gender" class="form-label"> Sexe </label>
+                                            <select id="gender" name="gender" class="form-control" required="required">
+                                                <option value="male">Homme</option>
+                                                <option value="female">Femme</option>
+                                            </select>
+                                        </div>
+                                </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-success">Ajouter Etudiant</button>
+                                        </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+
+     <template id="teacher_page" name="University Teacher">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="oe_structure">
+                    <div class="container">
+                        <div class="row">
+                            <div class='col-md-6'>
+                                <h1>Professeurs </h1>
+                            </div>
+                            <div class="col-md-12">
+                                <form class="row g-3 needs-validation" role="form" action="/creer/teacher" method="POST"
+                                      validate="True">
+                                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="f_name" class="form-label">Nom Professeur</label>
+                                            <input type="text" name="f_name" class="form-control" id="f_name"
+                                                   required="required" minlength="3" maxlength="20" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="date_of_birth" class="form-label">Date de naissance</label>
+                                            <input type="Date" name="date_of_birth" class="form-control" id="date_of_birth"
+                                                   required="required" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="e_mail" class="form-label">Email</label>
+                                            <input type="email" name="e_mail" class="form-control" id="e_mail"
+                                                   required="required"
+                                                   pattern="[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([_\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="identity_card" class="form-label">
+                                                N°cin/N°passeport</label>
+                                            <input type="text" name="identity_card" class="form-control"
+                                                   id="identity_card" required="required"
+                                                   pattern="[ \.\-]?[0-9]{2}[ \.\-]?[0-9]{2}[ \.\-]?[0-9]{2}[ \.\-]?[0-9]{2}" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="phone" class="form-label">Téléphone</label>
+                                            <input type="tel" name="phone" class="form-control" id="phone"
+                                                   required="required" />
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="l_name" class="form-label">Prenom Professeur</label>
+                                            <input type="text" name="l_name" class="form-control" id="l_name"
+                                                   required="required" minlength="3" maxlength="20" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="rue" class="form-label">Rue</label>
+                                            <input type="text" name="rue" class="form-control" id="rue"
+                                                   required="required" minlength="3" maxlength="20" />
+                                        </div>
+
+                                          <div class="form-group">
+                                            <label for="ville" class="form-label">Ville</label>
+                                            <input type="text" name="ville" class="form-control" id="ville"
+                                                   required="required" minlength="3" maxlength="20" />
+                                        </div>
+
+                                          <div class="form-group">
+                                            <label for="code_postale" class="form-label">Code Postal</label>
+                                            <input type="text" name="code_postale" class="form-control" id="code_postale"
+                                                   required="required" minlength="3" maxlength="20" />
+                                        </div>
+                                         <div class="form-group">
+                                            <label for="gender" class="form-label"> Sexe </label>
+                                            <select id="gender" name="gender" class="form-control" required="required">
+                                                <option value="male">Homme</option>
+                                                <option value="female">Femme</option>
+                                            </select>
+                                        </div>
+                                </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-success">Ajouter Professeur</button>
+                                        </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+     <template id="student_page_thanks" name="University Student thnaks">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="oe_structure">
+                    <div class="container">
+                        <div class="container pt-3">
+                        <h1>Thanks!</h1>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="alert alert-success" role="status">
+                                    Your message has been sent successfully.
+
+                                </div>
+                                <p>
+                                    We will get back to you shortly.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

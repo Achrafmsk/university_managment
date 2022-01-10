@@ -1,0 +1,65 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="subject_list_view">
+      <field name="name">Subject list</field>
+      <field name="model">university.subject</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="code"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- explicit from view definition -->
+
+    <record model="ir.ui.view" id="subject_form_view">
+      <field name="name">Subject From</field>
+      <field name="model">university.subject</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="name"/>
+            <field name="code"/>
+          </group>
+
+                     <notebook>
+
+                        <page string="Professeurs" name="professeur">
+                            <group>
+                                <field name="professor_ids"/>
+                            </group>
+                        </page>
+                    </notebook>
+        </form>
+      </field>
+    </record>
+    <!-- actions opening views on models -->
+
+   <record id="subject_action_window" model="ir.actions.act_window">
+        <field name="name">Subject</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">university.subject</field>
+        <field name="view_mode">kanban,tree,form</field>
+
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                add your first Subject !
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="subject_menu_root"
+              name="Matieres"
+              parent="university_managment.university_menu_root"
+              sequence="10"/>
+
+    <menuitem id="matiere_menu"
+              name="Matiere"
+              parent="subject_menu_root"
+              action="subject_action_window"
+              sequence="10"/>
+  </data>
+</odoo>

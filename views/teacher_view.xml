@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_teacher_kanban">
+        <field name="name">teacher.view.kanban</field>
+        <field name="model">university.teacher</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="f_name"/>
+                <field name="l_name"/>
+                <field name="identity_card"/>
+                <field name="gender"/>
+                <field name="date_of_birth"/>
+                <field name="date_start"/>
+                <field name="e_mail"/>
+                <field name="phone"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <ul>
+                                <li>First name :
+                                    <field name="f_name"/>
+                                </li>
+                                <li>Last name :
+                                    <field name="l_name"/>
+                                </li>
+                                <li>CIN :
+                                    <field name="identity_card"/>
+                                </li>
+                                <li>Gender :
+                                    <field name="gender"/>
+                                </li>
+                                <li>Date of birth :
+                                    <field name="date_of_birth"/>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_teacher_tree">
+        <field name="name">teacher.view.tree</field>
+        <field name="model">university.teacher</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="f_name"/>
+                <field name="l_name"/>
+                <field name="identity_card"/>
+                <field name="gender"/>
+                <field name="date_of_birth"/>
+                <field name="date_start"/>
+                <field name="e_mail"/>
+                <field name="phone"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_teacher_form">
+        <field name="name">teacher.view.form</field>
+        <field name="model">university.teacher</field>
+        <field name="arch" type="xml">
+            <form>
+
+                <sheet>
+                    <div class="oe_title">
+<!--                        <h1>-->
+<!--                            <field name="reference"/>-->
+<!--                        </h1>-->
+                    </div>
+                    <group string="Personal Information">
+                        <field name="identity_card"/>
+                        <field name="f_name"/>
+                        <field name="l_name"/>
+                    </group>
+                    <group>
+                        <field name="gender"/>
+                        <field name="date_of_birth"/>
+                    </group>
+                    <group>
+                        <field name="date_start"/>
+                        <field name="e_mail"/>
+                        <field name="phone"/>
+                    </group>
+                      <group>
+                         <field name="subject_id"/>
+                    </group>
+                    <notebook>
+                        <page string="Adresse" name="information">
+                            <group>
+                                <field name="rue"/>
+                                <field name="ville"/>
+                                <field name="code_postale"/>
+                            </group>
+                        </page>
+                        <page string="Suggestions" name="suggestions">
+                            <group>
+                                <field name="suggestions"/>
+                            </group>
+                        </page>
+
+                        <page string="Classes" name="classe">
+                            <group>
+                                <field name="class_ids"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="teacher_search" model="ir.ui.view">
+        <field name="name">university.teacher.search</field>
+        <field name="model">university.teacher</field>
+        <field name="arch" type="xml">
+            <search string="teachers">
+                <field name="f_name"/>
+                <field name="l_name"/>
+                <field name="identity_card"/>
+                <separator/>
+                <group expand="0" string="Group By">
+                    <filter string="gender" name="groupby_gender" domain="[]" context="{'group_by':'gender'}"/>
+                    <filter string="first_name" name="groupby_f_name" domain="[]" context="{'group_by':'f_name'}"/>
+                </group>
+                <filter string="male" name="gender_male" domain="[('gender', '=', 'male')]"/>
+                <filter string="female" name="gender_female" domain="[('gender', '=', 'female')]"/>
+            </search>
+        </field>
+    </record>
+    <record id="teacher_action_window" model="ir.actions.act_window">
+        <field name="name">teachers</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">university.teacher</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                add your first teacher !
+            </p>
+        </field>
+    </record>
+    <menuitem id="teacher_menu_root"
+              name="Teachers"
+              parent="university_menu_root"
+              sequence="10"/>
+
+    <menuitem id="teacher_menu"
+              name="Teachers"
+              parent="teacher_menu_root"
+              action="teacher_action_window"
+              sequence="10"/>
+</odoo>
