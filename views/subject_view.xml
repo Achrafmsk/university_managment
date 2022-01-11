@@ -9,6 +9,7 @@
         <tree>
           <field name="name"/>
           <field name="code"/>
+
         </tree>
       </field>
     </record>
@@ -23,6 +24,11 @@
           <group>
             <field name="name"/>
             <field name="code"/>
+
+                <field name="course"/>
+                <field name="activity"/>
+                <field name="student_work"/>
+
           </group>
 
                      <notebook>

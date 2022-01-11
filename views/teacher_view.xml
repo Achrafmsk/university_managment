@@ -11,13 +11,19 @@
                 <field name="identity_card"/>
                 <field name="gender"/>
                 <field name="date_of_birth"/>
-                <field name="date_start"/>
+                <field name="date_inscription"/>
                 <field name="e_mail"/>
                 <field name="phone"/>
+                 <field name="image"/>
                 <templates>
                     <t t-name="kanban-box">
                         <div t-attf-class="oe_kanban_card oe_kanban_global_click">
                             <ul>
+
+                                     <field name="image" nolabel="1" widget="image" class="oe_right oe_avatar"/>
+
+
+
                                 <li>First name :
                                     <field name="f_name"/>
                                 </li>
@@ -33,10 +39,8 @@
                                 <li>Date of birth :
                                     <field name="date_of_birth"/>
                                 </li>
-
                             </ul>
                         </div>
-
                     </t>
                 </templates>
             </kanban>
@@ -48,12 +52,12 @@
         <field name="model">university.teacher</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="f_name"/>
+                 <field name="f_name"/>
                 <field name="l_name"/>
                 <field name="identity_card"/>
                 <field name="gender"/>
                 <field name="date_of_birth"/>
-                <field name="date_start"/>
+                <field name="date_inscription"/>
                 <field name="e_mail"/>
                 <field name="phone"/>
             </tree>
@@ -65,24 +69,35 @@
         <field name="model">university.teacher</field>
         <field name="arch" type="xml">
             <form>
-
                 <sheet>
-                    <div class="oe_title">
-<!--                        <h1>-->
-<!--                            <field name="reference"/>-->
-<!--                        </h1>-->
-                    </div>
+                <header>
+
+
+                         <button name="action_en_cours" type="object" states='enregistre'  string="En cours" class="oe_highlight"
+                        groups="university_managment.group_university_administrateur" />
+                        <button name="action_administration" type="object"  string="Droit Professeurs" class="oe_highlight"
+                         groups="university_managment.group_university_administrateur"/>
+                         <field name="state" widget="statusbar" statusbar_visible="enregistre,en_cours"
+                               options="{'clickable':0}"/>
+
+                     </header>
+
+                    <field name="image" widget="image" class="oe_avatar"/>
+
                     <group string="Personal Information">
-                        <field name="identity_card"/>
+
                         <field name="f_name"/>
                         <field name="l_name"/>
+                        <field name="identity_card"/>
+                        <field name="image_cv" />
+
+
                     </group>
+
                     <group>
                         <field name="gender"/>
                         <field name="date_of_birth"/>
-                    </group>
-                    <group>
-                        <field name="date_start"/>
+                        <field name="date_inscription"/>
                         <field name="e_mail"/>
                         <field name="phone"/>
                     </group>
@@ -95,11 +110,6 @@
                                 <field name="rue"/>
                                 <field name="ville"/>
                                 <field name="code_postale"/>
-                            </group>
-                        </page>
-                        <page string="Suggestions" name="suggestions">
-                            <group>
-                                <field name="suggestions"/>
                             </group>
                         </page>
 

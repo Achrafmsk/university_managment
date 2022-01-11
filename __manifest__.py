@@ -17,13 +17,13 @@
             'security/ir.model.access.csv',
             'data/sequences.xml',
             # 'data/cron.xml',
-
-            #    'wizards/teacher_grade.xml',
-            #   'report/report_teacher.xml',
-            #   'report/template_teacher.xml',
             'report/report_student.xml',
             'report/template_student.xml',
             'data/mail_template.xml',
+            #    'wizards/teacher_grade.xml',
+            #   'report/report_teacher.xml',
+            #   'report/template_teacher.xml',
+
             #   'report/report_department.xml',
             #   'report/template_department.xml',
             'views/website.xml',

@@ -8,13 +8,14 @@ class University_student(http.Controller):
     @http.route('/university/student/', type="http", website=True, auth='public')
     def university_student(self, **kw):
         # return "Thanks for watching"
-
+        print("aziz")
         # http.request.env['university.student'].sudo().create(kw)
         return http.request.render("university_managment.student_page", {
         })
 
     @http.route('/creer/student', type="http", auth='public', website=True)
     def creeruser_student(self, **kw):
+        print("aziz")
         http.request.env['university.student'].sudo().create(kw)
         return http.request.render('university_managment.student_page_thanks', {})
 

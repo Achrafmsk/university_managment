@@ -16,9 +16,9 @@
                                     <b t-field="o.identity_card"/>
                                 </h5>
                                 <p class="card-text">
-                                    <t t-if="o.avatar">
-                                        <img t-att-src="'data:image/png;base64,%s' % to_text(o.avatar)"
-                                             style="max-height:4cm; max-width:4cm;-webkit-transform: rotate(-90deg);-moz-transform: rotate(-90deg);-o-transform: rotate(-90deg);-ms-transform: rotate(-90deg);transform: rotate(-90deg);"/>
+                                    <t t-if="o.image">
+                                        <img t-att-src="'data:image/png;base64,%s' % to_text(o.image)"
+                                             style="max-height:4cm; max-width:4cm;transform: rotate(180deg);-webkit-transform: rotate(90deg);-moz-transform: rotate(-90deg);-o-transform: rotate(-90deg);-ms-transform: rotate(-90deg);transform: rotate(-90deg);"/>
                                     </t>
                                     <ul>
                                         <li class="badge badge-secondary">Date of birth :

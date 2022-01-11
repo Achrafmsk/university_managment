@@ -5,7 +5,7 @@ class UniversityEmploi(models.Model):
     _name = 'university.emploi'
     _inherit = ['mail.thread','mail.activity.mixin',]
     _description = 'Gestion des emplois '
-    # _rec_name = 'f_name'
+    _rec_name = 'emploi_name'
     reference = fields.Char(string='Emploi reference', required=True, copy=False, readonly=True,
                         default=lambda self: _('New'))
     emploi_name = fields.Char(string='Emploi Name', tracking = True)

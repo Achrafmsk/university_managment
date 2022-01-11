@@ -15,8 +15,8 @@
 
     <menuitem id="university_menu_root"
               name="University"
-              web_icon="university_managment,static/src/img/icon.png"
               action="university_action_window"
+              web_icon="university_managment,static/src/img/icon.png"
               sequence="10"/>
 
 

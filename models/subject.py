@@ -9,6 +9,9 @@ class UniversitySubject(models.Model):
 
     name = fields.Char()
     code = fields.Char()
+    course = fields.Binary("Course")
+    activity = fields.Binary("Activity")
+    student_work = fields.Binary("Student work")
     # reference = fields.Char(string='subject reference', required=True, copy=False, readonly=True,
     #                         default=lambda self: _('New'))
 

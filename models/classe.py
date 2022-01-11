@@ -2,13 +2,13 @@ from odoo import models, fields,api,_
 
 class UniversityClass(models.Model):
     _name = 'university.class'
-    _rec_name = 'class_name'
     _inherit = ['mail.thread','mail.activity.mixin',]
-    _description = 'Gestion de classes'
-
+    _description = 'Gestion Classe'
+    _rec_name = 'class_name'
+    class_name = fields.Char(string='Class Name', tracking=True)
     reference = fields.Char(string='class reference', required=True, copy=False, readonly=True,
                         default=lambda self: _('New'))
-    class_name = fields.Char(string='Class Name', tracking = True)
+
     class_code = fields.Char(string='Code Class',tracking = True)
     date_creation = fields.Datetime(string='Date Creation')
     student_ids = fields.One2many(comodel_name='university.student', inverse_name='class_id', string="Students")

@@ -21,6 +21,7 @@
                                 </li>
                             </ul>
                         </div>
+
                     </t>
                 </templates>
             </kanban>
@@ -32,7 +33,7 @@
         <field name="model">university.class</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="reference"/>
+                 <field name="reference"/>
                 <field name="class_name"/>
                 <field name="class_code"/>
             </tree>

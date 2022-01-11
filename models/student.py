@@ -1,7 +1,7 @@
 from odoo import models, fields,api,_
 from odoo.exceptions import ValidationError
-from datetime import datetime
 import re,random,string
+from datetime import datetime
 
 # self.env.user.has_group('base.group_user') # Check for Internal User
 #     self.env.user.has_group('base.group_portal') # Check for Portal User
@@ -31,8 +31,10 @@ class UniversityStudent(models.Model):
      ]
 
     reference = fields.Char(string='student reference', required=True, copy=False, readonly=True,
-                            default=lambda self: _('New'))
+                             default=lambda self: _('New'))
     student_id = fields.Many2one('res.users', ondelete='set null', string="User", index=True)
+    class_id = fields.Many2one(comodel_name='university.class', string='Classe' )
+
     f_name = fields.Char(string="Prenom",required = True )
     l_name = fields.Char(string='Nom',tracking = True ,required = True)
     date_of_birth = fields.Date(string='Date de Naissance', required=True)
@@ -43,35 +45,24 @@ class UniversityStudent(models.Model):
     rue = fields.Char('Rue')
     ville = fields.Char('Ville')
     code_postale = fields.Char('Code postale')
-    date=fields.Date(default=datetime.today())
-    class_id = fields.Many2one(comodel_name='university.class', string='Classe')
     date_inscription = fields.Datetime(string='Date Inscription' , default=fields.Datetime.now, readonly=True)
+    image = fields.Binary(string="Image", attachment=True)
+    image_cv= fields.Binary(string="CV", attachment=True)
+    password = fields.Char(string='Password', required=True)
+    date = fields.Date(default=datetime.today())
     date_paiement = fields.Datetime(string='Date Prochain Paiement', default=fields.Datetime.now)
-    etat_etudiant = fields.Char(string='Etat', compute='get_etat')
-    password = fields.Char(string='Password',required=True)
     state = fields.Selection([
         ('nouveau', 'Nouveau Inscrit'),
         ('attente', 'En attente'),
         ('affecte', 'Affecté'),
         ('paiment_reg', 'Paiement effectué'),
-        ('mail_sended','Mail sended')
+        ('mail_sended', 'Mail sended')
     ], string='Status', readonly=True, default='nouveau')
-    avatar = fields.Binary(string='student image')
-
-    def get_etat(self):
-        user = self.env['res.users'].browse(self.student_id.id)
-        if user.has_group('university_managment.group_university_student'):
-            self.etat_etudiant = 'Etudiant'
-        else:
-            self.etat_etudiant= 'non etudiant'
-
-
-
 
     def action_administration(self):
-        self.env.ref('university_managment.group_university_student').write({'users':[(4,self.student_id.id)]})
-        self.env.ref('university_managment.group_university_teacher').write({'users':[(3,self.student_id.id)]})
-        self.env.ref('university_managment.group_university_administrateur').write({'users':[(3,self.student_id.id)]})
+        self.env.ref('university_managment.group_university_student').write({'users': [(4, self.student_id.id)]})
+        self.env.ref('university_managment.group_university_teacher').write({'users': [(3, self.student_id.id)]})
+        self.env.ref('university_managment.group_university_administrateur').write({'users': [(3, self.student_id.id)]})
 
     def action_en_attente(self):
         self.state = 'attente'
@@ -90,17 +81,11 @@ class UniversityStudent(models.Model):
             'email_to': self.e_mail
         }
         self.env['mail.template'].browse(template_mail_id).send_mail(self.id, email_values=vals, force_send=True)
-    # @api.model
-    # def create(self, values):
-    #     if values.get('reference', _('New')) == _('New'):
-    #         values['reference'] = self.env['ir.sequence'].next_by_code('university.student.seq') or _('New')
-    #     result = super(UniversityStudent, self).create(values)
-    #     return result
 
     @api.model
     def create(self, values):
         password = ''
-        for pwd in range(8):
+        for i in range(8):
             password += random.SystemRandom().choice(string.ascii_letters + string.digits)
         values.update(password=password)
         if self.env['res.users'].sudo().search([('login', '=', values.get('e_mail'))]):
@@ -116,8 +101,8 @@ class UniversityStudent(models.Model):
             user_id = self.env['res.users'].sudo().create(vals_user)
             values.update(student_id=user_id.id)
         res = super(UniversityStudent, self).create(values)
-        print(self.password,'------------')
-        print(password,'**********')
+        print(self.password, '------------')
+        print(password, '**********')
         return res
 
     @api.constrains('e_mail')
@@ -128,8 +113,8 @@ class UniversityStudent(models.Model):
 
     @api.constrains('phone')
     def check_name(self):
-            if len(self.phone) != 8:
-                raise ValidationError(_('Numéro de tel doit contenir seulement 8 chiffres'))
-            if len(self.identity_card) != 8:
-                raise ValidationError(_('Numéro  de cin/passeport doit contenir seulement 8 chiffres'))
+        if len(self.phone) != 8:
+            raise ValidationError(_('Numéro de tel doit contenir seulement 8 chiffres'))
+        if len(self.identity_card) != 8:
+            raise ValidationError(_('Numéro  de cin/passeport doit contenir seulement 8 chiffres'))
 
