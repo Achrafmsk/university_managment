@@ -160,6 +160,7 @@
     <menuitem id="teacher_menu_root"
               name="Teachers"
               parent="university_menu_root"
+              groups="university_managment.group_university_administrateur"
               sequence="10"/>
 
     <menuitem id="teacher_menu"
