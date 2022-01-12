@@ -122,5 +122,16 @@
         <field name="perm_read" eval="1"/>
     </record>
 
+    <record model="ir.rule" id="see_his_own_courses">
+        <field name="name">See His courses</field>
+        <field name="model_id" ref="model_university_subject"/>
+        <field name="domain_force">[('classe_ids.student_ids.student_id','=',user.id)]</field>
+        <field name="groups" eval="[(4, ref('group_university_student'))]"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+        <field name="perm_read" eval="1"/>
+    </record>
+
 
 </odoo>

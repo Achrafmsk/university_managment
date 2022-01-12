@@ -24,9 +24,10 @@
           <group>
             <field name="name"/>
             <field name="code"/>
+            <field name="classe_ids" widget="many2many_tags"/>
 
-                <field name="course"/>
-                <field name="activity"/>
+                <field name="course" attrs="{'readonly': [('student_work', '=', False)]}"/>
+                <field name="activity" attrs="{'readonly': [('student_work', '=', False)]}"/>
                 <field name="student_work"/>
 
           </group>

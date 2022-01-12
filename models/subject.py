@@ -12,6 +12,7 @@ class UniversitySubject(models.Model):
     course = fields.Binary("Course")
     activity = fields.Binary("Activity")
     student_work = fields.Binary("Student work")
+    classe_ids = fields.Many2many('university.class',string='classes')
     # reference = fields.Char(string='subject reference', required=True, copy=False, readonly=True,
     #                         default=lambda self: _('New'))
 
