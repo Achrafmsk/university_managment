@@ -106,7 +106,7 @@
     <menuitem id="class_menu_root"
               name="Class"
               parent="university_managment.university_menu_root"
-              groups="university_managment.group_university_administrateur"
+              groups="university_managment.group_university_administrateur,university_managment.group_university_teacher"
               sequence="10"/>
 
     <menuitem id="class_menu"
