@@ -50,4 +50,39 @@
         <field name="report_name">Attestation d'inscription_${(object.f_name)}_${(object.l_name)}</field>
     </record>
 
+    <record id="teacher_inscription_email" model="mail.template">
+        <field name="name">teacher : Send by email</field>
+        <field name="model_id" ref="model_university_teacher"/>
+        <field name="subject">Teacher Inscription (${object.f_name})</field>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px;">
+                <p style="margin: 0px; padding: 0px; font-size: 13px;text-align: justify;letter-spacing: 1px;">
+                    Cher(ère) collaborateur(trice):
+                    <b>${object.f_name} ${object.l_name}</b>
+                    <br/>
+                    <br/>
+                    Nous vous addressons cet e-mail afin de vous informer que vous êtes désormais inscrits au sein de notre équipe d'enseignement
+                    <br/>
+                    <br/>
+                    Vos paramètres de connexion sont les suivants :
+                    <br/>
+                    <br/>
+                    login :
+                    <b>${object.e_mail}</b>
+                    <br/>
+                    password :
+                    <b>${object.password}</b>
+                    <br/>
+                    <br/>
+                    NB: Faites attention! vous êtes inscrits sur la plateforme d'enseignement en ligne avec le compte
+                    @uvt.tn . Vous avez l'obligation de l'utiliser dans toutes vos échanges sur la plateforme avec vos étudiants et coordinateur.
+
+                    <br/><br/>
+                    Cordialement.
+                </p>
+            </div>
+        </field>
+
+    </record>
+
 </odoo>

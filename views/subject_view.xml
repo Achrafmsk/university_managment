@@ -26,9 +26,7 @@
             <field name="code"/>
             <field name="classe_ids" widget="many2many_tags"/>
 
-                <field name="course"/>
-                <field name="activity"/>
-                <field name="student_work"/>
+
 
           </group>
 
@@ -59,12 +57,12 @@
     </record>
 
     <menuitem id="subject_menu_root"
-              name="Matieres"
+              name="Subjects"
               parent="university_managment.university_menu_root"
               sequence="10"/>
 
     <menuitem id="matiere_menu"
-              name="Matiere"
+              name="Subject"
               parent="subject_menu_root"
               action="subject_action_window"
               sequence="10"/>

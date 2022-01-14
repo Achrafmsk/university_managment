@@ -12,8 +12,9 @@ class UniversitySeance(models.Model):
     seance_date_fin = fields.Datetime(string='Date fin')
     seance_id = fields.Many2one(comodel_name='university.emploi', string='Emploi', readonly=True)
     teacher_id = fields.Many2one(comodel_name='university.teacher', string='Professeur')
-    cours_1 = fields.Binary( string='Cours 1 : ')
-    cours_2 = fields.Binary(string='Cours 2 : ')
+    course = fields.Binary( string='Course: ')
+    activity = fields.Binary(string='Activity: ')
+    student_work = fields.Binary(string='Student work: ')
 
 
 

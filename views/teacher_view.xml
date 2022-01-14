@@ -79,6 +79,9 @@
                          groups="university_managment.group_university_administrateur"/>
                          <field name="state" widget="statusbar" statusbar_visible="enregistre,en_cours"
                                options="{'clickable':0}"/>
+                    <button name="action_mail_send" type="object" states='en_cours' string="Send mail"
+                                class="oe_highlight"
+                                groups="university_managment.group_university_administrateur"/>
 
                      </header>
 

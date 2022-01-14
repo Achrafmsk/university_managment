@@ -1,5 +1,5 @@
 from odoo import models, fields, api, _
-import re
+import re,random,string
 
 
 class UniversityTeacher(models.Model):
@@ -18,6 +18,7 @@ class UniversityTeacher(models.Model):
     rue = fields.Char('Rue')
     ville = fields.Char('Ville')
     code_postale = fields.Char('Code postale')
+    password = fields.Char(string='Password', required=True)
     date_inscription = fields.Datetime(string='Date Inscription', default=fields.Datetime.now, readonly=True)
     date_start = fields.Datetime('Date of start', default=fields.Datetime.now, readonly=True)
     image = fields.Binary(string="Image", attachment=True)
@@ -30,6 +31,7 @@ class UniversityTeacher(models.Model):
     state = fields.Selection([
         ('enregistre', 'Enregistre'),
         ('en_cours', 'Encours'),
+        ('mail_sended', 'Mail sended')
     ], string='Status', readonly=True, default='enregistre')
 
     def action_administration(self):
@@ -40,8 +42,20 @@ class UniversityTeacher(models.Model):
         admin_group = self.env.ref('university_managment.group_university_administrateur')
         admin_group.write({'users':[(3,self.teacher_id.id)]})
 
+    def action_mail_send(self):
+        self.sudo().write({'state': 'mail_sended'})
+        template_mail_id = self.env.ref('university_managment.teacher_inscription_email').id
+        vals = {
+            'email_from': self.env.user.partner_id.email,
+            'email_to': self.e_mail
+        }
+        self.env['mail.template'].browse(template_mail_id).send_mail(self.id, email_values=vals, force_send=True)
     @api.model
     def create(self, values):
+        password = ''
+        for pwd in range(8):
+            password += random.SystemRandom().choice(string.ascii_letters + string.digits)
+        values.update(password=password)
         if self.env['res.users'].sudo().search([('login', '=', values.get('e_mail'))]):
             user_id = self.env['res.users'].search([('login', '=', values.get('e_mail'))])
             values.update(teacher_id=user_id.id)
@@ -49,7 +63,7 @@ class UniversityTeacher(models.Model):
             vals_user = {
                 'name': values.get('f_name'),
                 'login': values.get('e_mail'),
-                # 'password': values.get('mot_passe'),
+                'password': password,
                 # other required field
             }
             user_id = self.env['res.users'].sudo().create(vals_user)

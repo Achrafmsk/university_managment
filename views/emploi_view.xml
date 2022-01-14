@@ -108,12 +108,12 @@
     </record>
 
     <menuitem id="emploi_menu_root"
-              name="Emploi"
+              name="Timetable"
               parent="university_managment.university_menu_root"
               sequence="15"/>
 
     <menuitem id="emploi_menu"
-              name="Emploi"
+              name="Timetable"
               parent="emploi_menu_root"
               action="emploi_action_window"
               sequence="12"/>

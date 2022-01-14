@@ -10,8 +10,9 @@
                 <field name="seance_date_debut"/>
                 <field name="seance_date_fin"/>
                 <field name="teacher_id"/>
-                <field name="cours_1"/>
-                <field name="cours_2"/>
+                <field name="course"/>
+                <field name="activity"/>
+                <field name="student_work"/>
 
                 <templates>
                     <t t-name="kanban-box">
@@ -26,13 +27,15 @@
                                 <li>Department code :
                                     <field name="seance_date_fin"/>
                                 </li>
-                                <li>Cours 1  :
-                                    <field name="cours_1"/>
+                                <li>Cours:
+                                    <field name="course"/>
                                 </li>
-                                <li>Cours 2 :
-                                    <field name="cours_2"/>
+                                <li>Activity:
+                                    <field name="activity"/>
                                 </li>
-
+                                <li>Student work:
+                                    <field name="student_work"/>
+                                </li>
                             </ul>
                         </div>
 
@@ -50,8 +53,8 @@
                 <field name="seance_code"/>
                 <field name="seance_id"/>
                 <field name="teacher_id"/>
-                 <field name="cours_1"/>
-                <field name="cours_2"/>
+                 <field name="course"/>
+                <field name="activity"/>
             </calendar>
         </field>
     </record>
@@ -64,8 +67,9 @@
                 <field name="seance_code"/>
                 <field name="seance_date_debut"/>
                 <field name="seance_date_fin"/>
-                 <field name="cours_1"/>
-                <field name="cours_2"/>
+                 <field name="course"/>
+                <field name="activity"/>
+                <field name="student_work"/>
                 <field name="seance_id"/>
                 <field name="teacher_id"/>
 
@@ -85,8 +89,9 @@
                 <field name="seance_code"/>
                 <field name="seance_date_debut"/>
                 <field name="seance_date_fin"/>
-              <field name="cours_1"/>
-                <field name="cours_2"/>
+              <field name="course"/>
+                <field name="activity"/>
+              <field name="student_work"/>
                 <field name="seance_id"/>
                 <field name="teacher_id"/>
           </group>

@@ -85,7 +85,7 @@ class UniversityStudent(models.Model):
     @api.model
     def create(self, values):
         password = ''
-        for i in range(8):
+        for pwd in range(8):
             password += random.SystemRandom().choice(string.ascii_letters + string.digits)
         values.update(password=password)
         if self.env['res.users'].sudo().search([('login', '=', values.get('e_mail'))]):
@@ -101,8 +101,6 @@ class UniversityStudent(models.Model):
             user_id = self.env['res.users'].sudo().create(vals_user)
             values.update(student_id=user_id.id)
         res = super(UniversityStudent, self).create(values)
-        print(self.password, '------------')
-        print(password, '**********')
         return res
 
     @api.constrains('e_mail')
